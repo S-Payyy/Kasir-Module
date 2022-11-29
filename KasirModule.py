@@ -4,7 +4,7 @@
 ### Module VERSION = 1.0.0
 
 try:
-    #from rich.table import Table
+    from rich.table import Table
     from rich.console import Console
     from rich.panel import Panel
     from rich.columns import Columns
@@ -22,7 +22,7 @@ except:
 class Menu:
     """Membuat Tabel Menu
     
-    Contoh Penggunaan:
+    Input:
         List = [("Menu Name1","Menu var1"),("Menu Name2","Menu var2")]
         \n\tMenu(List1)
     """
@@ -41,10 +41,13 @@ class Menu:
 class Bon:
     """Membuat Output Struk.
 
-    Contoh penggunaan:\n
+    Input:\n
         List1 = [("Nama","Barang","Jumlah","Harga","Diskon"),(...)] or List2 = ["Nama","Barang","Jumlah","Harga","Diskon"]
 
         Bon(List , hide print in terminal: True or False, default is True) 
+
+    Output:
+        Otomatis membuat file baru struk.txt
     """
 
     def __init__(self,data:list,printin = True) -> None:
@@ -91,11 +94,30 @@ class Bon:
         else:
             print(ss)
 
+class TabelProduk:
+    """Membuat Tabel Data.
 
-#Testing
+    Input:\n
+        data = [("1","Indomie","2000"),("2","Kentang","5000")]\n
+        TabelHarga(data)
 
-#listss = [("Monster","mon"),("Hewan","hw"),("Hewanasdd","asd")]
-#Menu(listss)
+    Output:
+        ID  Name        Price\n
+        1   Indomie     2000\n
+        2   Kentang     5000\n
 
-#listt = ["Pay2","Indomie","1",1000,0]
-#Bon(listt,printin= False)
+    catatan:
+        data harus berisikan ``Tuple List`` dengan 3 data.
+    """
+    def __init__(self,data:list) -> None:
+        self.data = data
+        self.__cTable()
+
+    def __cTable(self):
+        t = Table()
+        col = ["ID","Name","Price"]
+        for a in col:
+            t.add_column(a)
+        for b in self.data:
+            t.add_row(f"{b[0]}",f"{b[1]}",f"{b[2]}")
+        con.print(t)
